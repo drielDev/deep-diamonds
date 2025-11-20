@@ -1,0 +1,21 @@
+# Deep Learning e Machine Learning
+tensorflow
+keras
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+
+# Notebooks
+jupyter
+ipykernel
+
+# Testes
+pytest
+
+# Qualidade de Código
+black
+flake8
+isort
+mypy
