@@ -1,5 +1,4 @@
 import pandas as pd 
-import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
@@ -8,10 +7,16 @@ def load_data(path='./data/diamonds.csv'):
     return pd.read_csv(path)
 
 def preprocess(df):
+    
+    df = df[(df['x'] > 0) & (df['y'] > 0) & (df['z'] > 0)]
     df['cut'] = df['cut'].map({'Fair': 0, 'Ideal': 1, 'Good': 2, 'Very Good': 3, 'Premium': 4})
     df['color'] = df['color'].map({'D': 0, 'E': 1, 'F': 2, 'G': 3, 'H': 4, 'I': 5, 'J': 6 })
     df['clarity'] = df['clarity'].map({'SI2': 0, 'SI1': 1, 'VS1': 2, 'VS2': 3, 'VVS2': 4, 'VVS1': 5, 'I1': 6, 'IF': 7,})
 
+    df['volume'] = df['x'] * df['y'] * df['z']
+
+    df = df.drop(columns=['x', 'y', 'z'])
+    
     X, y = df.drop('price', axis=1), df['price']
     
     return X, y
