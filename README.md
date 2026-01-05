@@ -1,64 +1,55 @@
-# deep-diamonds
+# Análise de Preço de Diamantes
 
-Projeto de exemplo para regressão de preço de diamantes usando redes neurais (TensorFlow / Keras).  
-Objetivo: código simples, legível
+Projeto de **Análise Exploratória de Dados (EDA)** com Python para compreender
+os principais fatores que influenciam o preço de diamantes, utilizando dados reais.
 
-## Estrutura
-- data/diamonds.csv        — dataset (esperado)
-- notebooks/exploracao.ipynb — análises exploratórias
-- src/
-  - data.py                — carregamento, limpeza e pré-processamento
-  - model.py               — definição e compilação do modelo neural
-  - train.py               — pipeline de treino (gera `models/diamond_model.keras`)
-  - predict.py             — previsão pontual usando um modelo treinado
-- models/                  — onde o modelo final é salvo
-- requirements.txt         — dependências
+O projeto inclui uma etapa de modelagem preditiva como complemento à análise.
 
-## Requisitos
-- Python 3.8+
-- Instalar dependências:
-  pip install -r requirements.txt
+## Objetivo
+Explorar, analisar e extrair insights de um dataset de diamantes, avaliando
+como características físicas e categóricas impactam o preço final.
 
-## Uso rápido
+## Tecnologias utilizadas
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+- Scikit-learn
+- TensorFlow / Keras (etapa complementar)
 
-1. Criar ambiente (Windows):
-   python -m venv .venv
-   .venv\Scripts\activate
-   pip install -r requirements.txt
+## Estrutura do projeto
+- data/diamonds.csv — dataset utilizado
+- notebooks/exploracao.ipynb — análise exploratória e visualização dos dados
+- src/ — scripts de limpeza, pré-processamento e modelagem
+- models/ — modelo treinado (etapa opcional)
 
-2. Treinar:
-   python src\train.py
-   - Salva o modelo em `models/diamond_model.keras`.
-   - Ao final, mostra métricas claras (MAE em dólar) e um exemplo: preço real vs preço previsto.
+## Análises realizadas
+- Limpeza e tratamento de dados
+- Análise estatística descritiva
+- Distribuição de preços
+- Relação entre preço, carat, corte, cor e clareza
+- Identificação de outliers
+- Visualizações para suporte à tomada de decisão
 
-3. Fazer uma previsão
-   python src\predict.py
-   O script faz uma previsão com os valores de um exemplo fixo
+## Principais insights
+- O preço apresenta forte correlação com o peso (carat)
+- Características como corte e clareza influenciam significativamente o valor
+- A presença de outliers impacta a média de preços
+- O volume do diamante é um fator relevante para previsão de valor
 
-4. Notebook (exploração):
+## Modelagem (etapa complementar)
+Foi implementado um modelo de regressão para estimar preços de diamantes,
+utilizado como extensão da análise exploratória.
+
+Métricas avaliadas:
+- MAE
+- RMSE
+
+## Como executar
+1. Criar ambiente virtual
+2. Instalar dependências
+3. Executar o notebook de exploração:
+   ```bash
    jupyter lab notebooks/exploracao.ipynb
-
-## Notas importantes
-- O pipeline espera o arquivo `data/diamonds.csv`. Ajuste o caminho se necessário.
-- Pré-processamento (src/data.py):
-  - Remove registros com dimensões inválidas.
-  - Mapeia categorias (`cut`, `color`, `clarity`) para inteiros.
-  - Cria `volume = x*y*z` e remove `x,y,z`.
-  - Escala features com MinMaxScaler.
-- Modelo salvo no formato Keras nativo (`.keras`).
-- Para evitar logs verbosos do TensorFlow, os scripts setam:
-  - `TF_CPP_MIN_LOG_LEVEL=3`
-  - `TF_ENABLE_ONEDNN_OPTS=0`
-  (esses são definidos nos próprios scripts antes de importar TF)
-
-## Boas práticas usadas no projeto
-- limpeza de outliers
-- divisão treino/validação via validation_split
-- early stopping com base no val_loss
-- métricas: MAE e RMSE
-- relatório final do treinamento com:
-  - erro médio em dólares
-  - um exemplo real comparado com previsão
-
-## Licença
-Código para fins educacionais. Use e adapte livremente.
